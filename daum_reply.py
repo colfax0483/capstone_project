@@ -22,7 +22,7 @@ def non_js_execute(url):
 if __name__=='__main__':
 
     data = []
-    url = "https://news.v.daum.net/v/20190405044333031"
+    url = "https://news.v.daum.net/v/20190416114303621"
     my_titles = non_js_execute(url).select('#alex-area > div > div > div > div> ul > li > div > .desc_txt')
     # print(my_titles)
     # print(len(my_titles))

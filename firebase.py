@@ -13,7 +13,7 @@ config={
 cred = credentials.Certificate("C:\capstone\ml-language-firebase-adminsdk-w9pqi-88584bf504.json")
 firebase_admin.initialize_app(cred, {"databaseURL": "https://ml-language.firebaseio.com/"})
 
-ref = db.reference('ml-language') # DB레버런스 선언
+ref = db.reference('ml-language/google_sentiment') # DB레버런스 선언
 #ref.update({"name" : "VR 서비스"}) #DB값 변경(업데이트)
 print(ref.get())
 firebase = db.database()
