@@ -9,6 +9,9 @@ import json
 # Instantiates a client
 client = language.LanguageServiceClient()
 
+analyze_file = "C:\\Secu\\파이썬팁.txt"
+
+# https://googleapis.github.io/google-cloud-python/latest/language/usage.html
 
 def sentiment_text(text): # 감정 분석
     document = types.Document(
@@ -63,7 +66,7 @@ def entities_text(text): # 항목 분석
 
 if __name__=='__main__':
     # The text to analyze
-    text = u'''	OAuth 2.0 프로토콜에서 E-mail을 이용한 사용자 권한 인증.pdf'''
+    text = u'''탐색할 문자열'''
     score, magnitude = sentiment_text(text)
     print("score : {},  magnitude : {}".format(score, magnitude))
     entities = entities_text(text)
