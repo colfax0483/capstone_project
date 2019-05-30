@@ -8,30 +8,47 @@ import sqlite3, datetime
 import os, sys, io
 import time
 
+
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 def concat(*args, sep=","):
     return sep.join(args)
 
-class Chrome:
-    def __init__(self,  select, historyfile = None):
+class Mysql:
+    def __init__(self, filedir = None):
         self.filename = []
         self.titlename = []
-        self.selecter = 0 # 다운로드파일, 방문 기록 선택
+
+    def sqlselecter(self, select): # 여기에 메뉴 확장, 상위 함수 만들어서 기능 확장시키기
+
+        cur = sqlite3.connect(self.historyfile, timeout=10)
+        try:
+            cur = sqlite3.connect(self.historyfile, timeout=10)
+            if (select == 1):
+                self.visiturl(cur)
+
+            elif(select == 2):
+                self.downloadfile(cur)
+        except:
+            print("sql error occured")
+        finally:
+            cur.close()
+
+
+class Chrome(Mysql):
+    def __init__(self, historyfile = None):
+        super(__class__,self).__init__(historyfile)  # 부모클래스 init 메서드 상속
+        self.selecter = 0  # 다운로드파일, 방문 기록 선택
         self.historyfile = historyfile or 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
         # self.historyfile = 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
 
-    def __iter__(self):
-        return self
-
+    @staticmethod
     def fixdate(self, timestamp): # 시간 변환
         self.timestamp = timestamp
         #To convert, we create a datetime object for Jan 1 1601...
         self.epoch_start = datetime.datetime(1601,1,1)
-        #create an object for the number of microseconds in the timestamp
         self.delta = datetime.timedelta(microseconds=int(self.timestamp))
-        #and return the sum of the two.
         return self.epoch_start + self.delta
 
     def downloadfile(self, c): # 다운로드 파일(시간, 경로, 크기)
@@ -65,26 +82,13 @@ class Chrome:
         print("방문한 사이트 >>> ")
         print(self.titlename)
 
-    def sqlselecter(self, select): # 여기에 메뉴 확장, 상위 함수 만들어서 기능 확장시키기
-        try:
-            cur = sqlite3.connect(self.historyfile, timeout=10)
-            if (select == 1):
-                self.visiturl(cur)
-
-            elif(select == 2):
-                self.downloadfile(cur)
-        except:
-            print("sql error occured")
-        finally:
-            cur.close()
-
 
 def main():
     print("어떤 항목을 출력할까요?\n0. 전부 분석 1. 방문기록 2. 다운로드 파일")
     select = int(input("숫자를 입력하세요: "))
 
     startTime = time.time()
-    r = Chrome(select, 'C:\\History')
+    r = Chrome('C:\\History')
 
     if (select == 0):
         history = r.sqlselecter(1)

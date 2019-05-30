@@ -3,3 +3,5 @@
 .idea/workspace.xml
 *.xml
 *.xml
+*.json
+*.exe

@@ -1,13 +1,13 @@
-import sqlite3
 import os
+import ChromeHistory
 
-class Firefox:
-    def __init__(self, firefox): #변수에 아무 값도 입력되지 않았을때, 어떤 값으로 초기화할지 지정해 줄 수 있다.
-
+class Firefox(ChromeHistory.Mysql):
+    def __init__(self, historyfile = None): #변수에 아무 값도 입력되지 않았을때, 어떤 값으로 초기화할지 지정해 줄 수 있다.
+        super(__class__, self).__init__(historyfile)
         self.filename = []
         self.titlename = []
         self.selecter = 0 # 전체 or 다운로드파일 or 방문 기록 선택
-        self.firefox = firefox or 'C:\\Users\\Jang\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\0q5fx2ae.default-release\\places.sqlite'
+        self.historyfile = historyfile or 'C:\\Users\\Jang\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\0q5fx2ae.default-release\\places.sqlite'
         #self.firefox = "C:\Users\Jang\AppData\Roaming\Mozilla\Firefox\Profiles\<Random>.default-release\places.sqlite"
         # <Random> 값이 존재하는데, 이 값은 Firefox 경로 밑에 profile.ini 파일 아래에 존재
 
@@ -32,19 +32,6 @@ class Firefox:
                     self.filename.append(f)
 
         print(self.filename)
-
-    def sqlselecter(self, select):  #sql 파싱을 위해
-
-        con = sqlite3.connect(self.firefox) # 파일 DB에 접속
-
-        if (select == 1):
-           self.webtitle(con)
-
-        elif(select == 2):
-           self.downloadfile(con)
-
-        #con.close() 프로그램 종료 시 python에서 열려있는 파일의 객체를 자동으로 닫아준다.
-        #직접 닫아 주는 것이 좋다. 쓰기모드로 열었던 파일을 닫지 않고 다시 사용할 경우 오류가 발생하기 때문
 
 def main():
     print('0. 전부 분석 1. 방문기록 2. 다운로드 파일')
