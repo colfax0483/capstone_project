@@ -1,0 +1,16 @@
+[INFO  - 2019-04-05T14:40:02.216Z] GhostDriver - Main - running on port 10014
+[INFO  - 2019-04-05T14:40:04.273Z] Session [b32185d0-57b0-11e9-896b-597bab06e67a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2019-04-05T14:40:04.273Z] Session [b32185d0-57b0-11e9-896b-597bab06e67a] - page.customHeaders:  - {}
+[INFO  - 2019-04-05T14:40:04.273Z] Session [b32185d0-57b0-11e9-896b-597bab06e67a] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2019-04-05T14:40:04.273Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: b32185d0-57b0-11e9-896b-597bab06e67a
+[ERROR - 2019-04-05T14:40:04.778Z] Session [b32185d0-57b0-11e9-896b-597bab06e67a] - page.onError - msg: TypeError: null is not an object (evaluating 'ie.match(/Version\/([0-9\.]+)/i)[1]')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2019-04-05T14:40:04.778Z] Session [b32185d0-57b0-11e9-896b-597bab06e67a] - page.onError - stack:
+  searchBrowserVersion (https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js:1)
+  init (https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js:1)
+  (anonymous function) (https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js:1)
+  r (https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js:1)
+  (anonymous function) (https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js:1)
+
+  phantomjs://platform/console++.js:263 in error
