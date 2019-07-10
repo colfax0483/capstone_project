@@ -19,21 +19,15 @@ class Mysql:
         self.filename = []
         self.titlename = []
 
-    def sqlselecter(self, select): # 여기에 메뉴 확장, 상위 함수 만들어서 기능 확장시키기
-
-        cur = sqlite3.connect(self.historyfile, timeout=10)
+    @staticmethod
+    def sqlselecter(self): # 여기에 메뉴 확장, 상위 함수 만들어서 기능 확장시키기
         try:
             cur = sqlite3.connect(self.historyfile, timeout=10)
-            if (select == 1):
-                self.visiturl(cur)
-
-            elif(select == 2):
-                self.downloadfile(cur)
+            return cur
         except:
             print("sql error occured")
-        finally:
-            cur.close()
-
+        #finally:
+            #cur.close()
 
 class Chrome(Mysql):
     def __init__(self, historyfile = None):
@@ -41,6 +35,7 @@ class Chrome(Mysql):
         self.selecter = 0  # 다운로드파일, 방문 기록 선택
         self.historyfile = historyfile or 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
         # self.historyfile = 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
+
 
     @staticmethod
     def fixdate(self, timestamp): # 시간 변환
@@ -61,11 +56,12 @@ class Chrome(Mysql):
                 m = os.path.splitext(base)[0]
                 if m != '': # 파일명이 없는 파일 제외
                     self.filename.append(m)
-        print("다운로드 받은 파일 >>> ")
-        print(self.filename)
+
+        return self.filename
 
 
-    def visiturl(self, c): # 방문한 사이트 타이틀, URL
+    def visiturl(self): # 방문한 사이트 타이틀, URL
+        c = Mysql.sqlselecter(self)
         self.selectStatement2 = 'SELECT visits.visit_time, urls.url, urls.title FROM visits, urls WHERE visits.url=urls.id;'
 
         for row in c.execute(self.selectStatement2):  # 방문한 사이트 타이틀
@@ -83,14 +79,14 @@ class Chrome(Mysql):
 
             if title != '': # 내용이 없는것 제외
                 self.titlename.append(title)
-                print(title)
+               # print(title)
                 ''' print ("\tFrom:",str(row[1]))
                     print ("\tStarted:",str(fixDate(row[2])))
                     print ("\tFinished:",str(fixDate(row[3])))
                     print ("\tSize:",str(row[4]))
                 '''
-        print("방문한 사이트 >>> ")
-        print(self.titlename)
+        # print(self.titlename)
+        return self.titlename
 
 class Firefox(Mysql):
     def __init__(self, historyfile = None): #변수에 아무 값도 입력되지 않았을때, 어떤 값으로 초기화할지 지정해 줄 수 있다.
@@ -133,12 +129,17 @@ def main():
     foxpath = Firefox('C:\\Users\\Jang\\Desktop\\places.sqlite') #클래스 호출
 
     if (select == 0):
-        history = chrome.sqlselecter(1)
+        history = chrome.visiturl()
+
         downloadfile = chrome.sqlselecter(2)
+        print(history)
+        print(downloadfile)
     elif (select == 1):
-        history = chrome.sqlselecter(1)
+        history = chrome.visiturl()
+        print(history)
     elif (select == 2):
         downloadfile = chrome.sqlselecter(2)
+        print(downloadfile)
     else:
         print("잘못 선택")
 
