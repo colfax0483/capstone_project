@@ -16,8 +16,8 @@ def concat(*args, sep=","):
 
 class Mysql:
     def __init__(self, filedir = None):
-        self.filename = []
-        self.titlename = []
+        self.filename = {}
+        self.titlename = {}
 
     @staticmethod
     def sqlselecter(self): # 여기에 메뉴 확장, 상위 함수 만들어서 기능 확장시키기
@@ -36,29 +36,28 @@ class Chrome(Mysql):
         self.historyfile = historyfile or 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
         # self.historyfile = 'C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History'
 
-
     @staticmethod
-    def fixdate(self, timestamp): # 시간 변환
-        self.timestamp = timestamp
+    def fixdate(timestamp): # 시간 변환
+        timestamp = timestamp
         #To convert, we create a datetime object for Jan 1 1601...
-        self.epoch_start = datetime.datetime(1601,1,1)
-        self.delta = datetime.timedelta(microseconds=int(self.timestamp))
-        return self.epoch_start + self.delta
+        epoch_start = datetime.datetime(1601,1,1)
+        delta = datetime.timedelta(microseconds=int(timestamp))
+        forsecond = epoch_start + delta
+        return epoch_start + delta
 
     def downloadfile(self, c): # 다운로드 파일(시간, 경로, 크기)
         self.selectStatement = 'SELECT target_path, referrer, start_time, end_time, received_bytes FROM downloads;'
 
         for row in c.execute(self.selectStatement):
             # print ("Download:",row[0])
-
+            downdate = str(fixDate(row[2]))
             if str(row[4]) != 0: #SIZE==0 다운로드 하지 않은 파일
                 base = os.path.basename(row[0])
                 m = os.path.splitext(base)[0]
                 if m != '': # 파일명이 없는 파일 제외
-                    self.filename.append(m)
+                    self.filename[m] = downdate
 
         return self.filename
-
 
     def visiturl(self): # 방문한 사이트 타이틀, URL
         c = Mysql.sqlselecter(self)
@@ -73,19 +72,23 @@ class Chrome(Mysql):
             title = row[2].rsplit('-' ,1)[0]
             title = row[2].rsplit(':', 1)[0]
 
+            visitdate = str(Chrome.fixdate(row[0]))
+
             for i in sitelist:
                 if i in row[2]:
                     title = row[2].replace(i,"")
 
             if title != '': # 내용이 없는것 제외
-                self.titlename.append(title)
+                self.titlename[title] = visitdate
                # print(title)
                 ''' print ("\tFrom:",str(row[1]))
                     print ("\tStarted:",str(fixDate(row[2])))
                     print ("\tFinished:",str(fixDate(row[3])))
                     print ("\tSize:",str(row[4]))
                 '''
+
         # print(self.titlename)
+        print(visitdate)
         return self.titlename
 
 class Firefox(Mysql):
