@@ -3,7 +3,7 @@ import os
 
 # 한글 레지스트리
 
-class Hwpoffice:
+class Registry:
 
     def __init__(self):
         self.reg = []
@@ -99,7 +99,7 @@ def main():
             print("잘못 선택 하셨습니다")
     '''
 
-    stry = Hwpoffice()
+    stry = Registry()
     regis = stry.selecter()
     print(regis)
 

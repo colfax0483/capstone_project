@@ -1,3 +1,5 @@
+# 미사용 코드 이동 190717 박도현
+# ChromeHistroy에 병합됨
 import os
 import ChromeHistory
 

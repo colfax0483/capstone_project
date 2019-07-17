@@ -1,3 +1,4 @@
+# 미사용 코드 이동 190717 박도현
 import sqlite3
 import os
 

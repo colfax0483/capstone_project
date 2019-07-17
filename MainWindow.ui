@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>949</width>
-    <height>629</height>
+    <width>710</width>
+    <height>627</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="FileLoad">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>390</x>
      <y>50</y>
      <width>51</width>
      <height>21</height>
@@ -35,7 +35,7 @@
     <rect>
      <x>30</x>
      <y>210</y>
-     <width>781</width>
+     <width>551</width>
      <height>161</height>
     </rect>
    </property>
@@ -43,8 +43,8 @@
   <widget class="QPushButton" name="Btn_Analyze">
    <property name="geometry">
     <rect>
-     <x>820</x>
-     <y>172</y>
+     <x>580</x>
+     <y>170</y>
      <width>121</width>
      <height>31</height>
     </rect>
@@ -58,7 +58,7 @@
     <rect>
      <x>30</x>
      <y>80</y>
-     <width>781</width>
+     <width>551</width>
      <height>121</height>
     </rect>
    </property>
@@ -121,7 +121,7 @@
   <widget class="QTextEdit" name="Brw_Dir">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>30</x>
      <y>50</y>
      <width>351</width>
      <height>21</height>
@@ -142,7 +142,7 @@
     <rect>
      <x>30</x>
      <y>70</y>
-     <width>791</width>
+     <width>551</width>
      <height>16</height>
     </rect>
    </property>
