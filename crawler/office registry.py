@@ -1,3 +1,5 @@
+# 미사용 코드 이동 190717 박도현
+# Registry.py로 병합됨
 import winreg
 import os
 

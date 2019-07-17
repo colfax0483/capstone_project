@@ -88,7 +88,6 @@ class Chrome(Mysql):
                 '''
 
         # print(self.titlename)
-        print(visitdate)
         return self.titlename
 
 class Firefox(Mysql):
@@ -139,7 +138,7 @@ def main():
         print(downloadfile)
     elif (select == 1):
         history = chrome.visiturl()
-        print(history)
+        print(list(history.keys()))
     elif (select == 2):
         downloadfile = chrome.sqlselecter(2)
         print(downloadfile)

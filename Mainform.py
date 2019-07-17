@@ -12,6 +12,7 @@ from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject, QEventLoop, Qt, QDate, QTime, QTimer, QThread
 from PyQt5 import uic
 from ChromeHistory import *
+from Registry import Registry
 
 form_class = uic.loadUiType("MainWindow.ui")[0]
 timer = QtCore.QTimer()
@@ -26,6 +27,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
     def __init__(self):
         super().__init__()
 
+        # 객체 초기화 시 버튼과 기능함수 연결
         self.FileLoad.clicked.connect(self.open_file)
         self.Btn_Analyze.clicked.connect(self.analyze)
 
@@ -43,15 +45,30 @@ class MyWindow(MainGUI, QMainWindow, form_class):
     @pyqtSlot()
     def analyze(self):
         print("Analyze Btn Clicked")
+        self.listWidget.clear()  # QListWidget Clear
+        # 파일 경로 확인
         try:
             path = self.Brw_Dir.toPlainText()
-            chrome = Chrome(path)
-            history = chrome.visiturl()
-
-            for idx in range(len(history)):
-                self.listWidget.addItem(QListWidgetItem(str(history[idx])))
         except:
             print("경로가 없거나 History 파일이 아님")
+
+        # 체크박스 구현부분, 새로 만들면 if 추가하면 됨
+        if self.chk_Chrome.isChecked() == True:
+            chrome = Chrome(path)
+            history = chrome.visiturl()
+            for idx in list(history.keys()):
+                self.listWidget.addItem(QListWidgetItem(idx))
+        if self.chk_Firefox.isChecked() == True:
+            firefox = Firefox(path)
+            fhistory = firefox.visiturl()
+        if self.chk_IE.isChecked() == True:
+            pass
+        if self.chk_Registry.isChecked() == True:
+            registry = Registry()
+            reglist= registry.selecter()
+            for idx in reglist:
+                self.listWidget.addItem(QListWidgetItem(idx))
+
 
     def closeEvent(self, event): # 가비지 콜렉션 정리 후 프로세스 종료하도록 (정상종료를 위해)
         self.deleteLater()
