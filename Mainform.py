@@ -13,6 +13,7 @@ from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject, QEventLoop, Qt, QDate, Q
 from PyQt5 import uic
 from ChromeHistory import *
 from Registry import Registry
+from unzip import *
 
 form_class = uic.loadUiType("MainWindow.ui")[0]
 timer = QtCore.QTimer()
@@ -37,6 +38,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
         print("파일찾기 Btn_clicked")
         self.file_name = QFileDialog.getOpenFileName(self, 'Open File', os.getenv('HOME'))
         self.Brw_Dir.setText(self.file_name[0])
+
         print(self.file_name[0])
 
         return self.file_name[0]
@@ -50,7 +52,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
         try:
             path = self.Brw_Dir.toPlainText()
         except:
-            print("경로가 없거나 History 파일이 아님")
+            print("경로가 없거나 아티팩트 파일이 아님 (.zip)")
 
         # 체크박스 구현부분, 새로 만들면 if 추가하면 됨
         if self.chk_Chrome.isChecked() == True:
