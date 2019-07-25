@@ -15,7 +15,10 @@ python setup.py install
 
 👤 **Dohyun Park, RaeSeung Jang, Seongmin Jang, Mintae Kim**
 
-* Github: [@colfax0483, rs0731, gkdldtka, kimals0288](https://github.com/colfax0483, rs0731, gkdldtka, kimals0288)
+* Github: [@colfax0483](https://github.com/colfax0483)
+           [@rs0731](https://github.com/rs0731)
+           [@gkdldtka](https://github.com/gkdldtka)
+           [@kimals0288](https://github.com/kimals0288)
 
 ## Show your support
 
