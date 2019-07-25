@@ -25,7 +25,7 @@ class Unzip:
             elif file == 'places.sqlite':
                 self.pathdic['firefox'] = '.\\ziptest\\artifacts\\places.sqlite'
             elif file == 'stickymemo':
-                pass
+                self.pathdic['stickymemo'] = '.\\ziptest\\artifacts\\plum.sqlite'
 
             filename.extract(file, '.\\ziptest\\artifacts')
 
