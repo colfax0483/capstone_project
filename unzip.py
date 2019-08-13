@@ -14,27 +14,27 @@ class Unzip:
         except NotZipFileError:
             return -1
 
-
         for file in filename.namelist(): # 압축파일 내 파일명을 리스트로
-            print(file)
+            # print(file) 파일명만 출력
             if file == 'History':
-                self.pathdic = {'chromehs' : '.\\unziptest\\artifacts\\History'}
+                self.pathdic['chromehs'] = '.\\ziptest\\artifacts\\History'
             if file == 'Bookmarks':
-                self.pathdic = {'chromebm' : '.\\unziptest\\artifacts\\Bookmarks'}
+                self.pathdic['chromebm'] = '.\\ziptest\\artifacts\\Bookmarks'
             elif file == 'WebCacheV01.dat':
-                self.pathdic = {'ie' : '.\\unziptest\\artifacts\\WebCacheV01.dat'}
+                self.pathdic['ie'] = '.\\ziptest\\artifacts\\WebCacheV01.dat'
             elif file == 'places.sqlite':
-                self.pathdic = {'firefox' : '.\\unziptest\\artifacts\\places.sqlite'}
+                self.pathdic['firefox'] = '.\\ziptest\\artifacts\\places.sqlite'
             elif file == 'stickymemo':
-                pass
+                self.pathdic['stickymemo'] = '.\\ziptest\\artifacts\\plum.sqlite'
 
-            filename.extract(file, '.\\unziptest\\artifacts')
+            filename.extract(file, '.\\ziptest\\artifacts')
 
         filename.close()
+        return self.pathdic
 
 def main():
 
-    ziptest = Unzip('C:\\GitProject\\capstone_private\\unziptest\\unziptest.zip')
+    ziptest = Unzip('C:\\GitProject\\capstone_private\\ziptest\\unziptest.zip')
     ziptest.fopen()
 
 if __name__ == '__main__':

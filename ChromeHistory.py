@@ -136,7 +136,7 @@ def main():
     select = int(input("숫자를 입력하세요: "))
 
     startTime = time.time()
-    chrome = Chrome('C:\\History')
+    chrome = Chrome('D:\\GitProject\\capstone_private\\History')
     foxpath = Firefox('C:\\Users\\Jang\\Desktop\\places.sqlite') #클래스 호출
 
     if (select == 0):
@@ -148,6 +148,7 @@ def main():
     elif (select == 1):
         history = chrome.visiturl()
         print(list(history.keys()))
+        print(list(history.values()))
     elif (select == 2):
         downloadfile = chrome.sqlselecter(2)
         print(downloadfile)
