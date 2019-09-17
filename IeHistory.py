@@ -18,7 +18,7 @@ class Iehistory:
     def convert_timestamp(self, timestamp):
         epoch_start = datetime(year=1601, month=1,day=1,hour=9)
         seconds_since_epoch = timestamp/10**7
-        return (epoch_start + timedelta(seconds=seconds_since_epoch)).strftime("%y-%m-%d %H:%M:%S")
+        return (epoch_start + timedelta(seconds=seconds_since_epoch)).strftime("%Y-%m-%d %H:%M:%S")
 
     def history(self):
         # 각 정보들은 Container_N 형식의 이름을 가진 테이블에 저장됨

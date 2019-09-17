@@ -7,6 +7,7 @@
 import sqlite3, datetime
 import os, sys, io
 import time
+from datetime import datetime, timedelta
 
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
@@ -40,10 +41,10 @@ class Chrome(Mysql):
     def fixdate(timestamp): # 시간 변환
         timestamp = timestamp
         #To convert, we create a datetime object for Jan 1 1601...
-        epoch_start = datetime.datetime(1601,1,1)
-        delta = datetime.timedelta(microseconds=int(timestamp))
+        epoch_start = datetime(1601,1,1)
+        delta = timedelta(microseconds=int(timestamp))
         forsecond = epoch_start + delta
-        return epoch_start + delta
+        return forsecond.strftime("%Y-%m-%d %H:%M:%S")
 
     def downloadfile(self, c): # 다운로드 파일(시간, 경로, 크기)
         self.selectStatement = 'SELECT target_path, referrer, start_time, end_time, received_bytes FROM downloads;'
@@ -79,7 +80,7 @@ class Chrome(Mysql):
                     title = row[2].replace(i,"")
 
             if title != '': # 내용이 없는것 제외
-                self.titlename[title] = visitdate
+                self.titlename[visitdate] = title
                # print(title)
                 ''' print ("\tFrom:",str(row[1]))
                     print ("\tStarted:",str(fixDate(row[2])))

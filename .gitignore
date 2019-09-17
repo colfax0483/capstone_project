@@ -1,8 +1,11 @@
 # Specify filepatterns you want git to ignore.
 
-unziptest/*
+unziptest/
+__pycache__/
 .idea/workspace.xml
 *.xml
 *.json
 *.exe
-
+*.iml
+*.pyc
+*.log

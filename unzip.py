@@ -24,7 +24,7 @@ class Unzip:
                 self.pathdic['ie'] = '.\\ziptest\\artifacts\\WebCacheV01.dat'
             elif file == 'places.sqlite':
                 self.pathdic['firefox'] = '.\\ziptest\\artifacts\\places.sqlite'
-            elif file == 'stickymemo':
+            elif file == 'plum.sqlite':
                 self.pathdic['stickymemo'] = '.\\ziptest\\artifacts\\plum.sqlite'
 
             filename.extract(file, '.\\ziptest\\artifacts')
