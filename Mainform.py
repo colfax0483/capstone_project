@@ -52,7 +52,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
         column_headers2 = ['Word', 'Count']
         self.tableWidget_2.setHorizontalHeaderLabels(column_headers2)
         self.currentRowCount2 = self.tableWidget_2.rowCount()
-        self.tableWidget_2.insertRow(self.currentRowCount2)
+        # self.tableWidget_2.insertRow(self.currentRowCount2)
         # self.tableWidget_2.setItem(self.currentRowCount2, 0, QTableWidgetItem("Some Text"))
         self.wordlist = {}
 
@@ -138,6 +138,8 @@ class MyWindow(MainGUI, QMainWindow, form_class):
     @pyqtSlot()
     def wordlist(self):
         # 아티팩트에서 명사 추출해서 나온 횟수 출력
+        self.tableWidget_2.clear()
+        self.tableWidget_2.setRowCount(0)
         self.words = Morpheme(self.artilist)
         self.wordlist = self.words.parser()
 
