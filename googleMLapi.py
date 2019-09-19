@@ -39,7 +39,7 @@ def entities_text(text): # 항목 분석
     # Instantiates a plain text document.
     document = types.Document(
         content=text,
-        type=enums.Document.Type.PLAIN_TEXT)
+        type='PLAIN_TEXT')
 
     # Detects entities in the document. You can also analyze HTML with:
     #   document.type == enums.Document.Type.HTML
@@ -48,14 +48,14 @@ def entities_text(text): # 항목 분석
     for entity in entities:
         cnt += 1
         entity_type = enums.Entity.Type(entity.type)
-        '''print('=' * 20)
+        print('=' * 20)
         print(u'{:<16}: {}'.format('name', entity.name))
         print(u'{:<16}: {}'.format('type', entity_type.name))
-        print(u'{:<16}: {}'.format('metadata', entity.metadata))
+        # print(u'{:<16}: {}'.format('metadata', entity.metadata))
         print(u'{:<16}: {}'.format('salience', entity.salience))
-        print(u'{:<16}: {}'.format('wikipedia_url',
-              entity.metadata.get('wikipedia_url', '-')))
-        '''
+        # print(u'{:<16}: {}'.format('wikipedia_url',
+              # entity.metadata.get('wikipedia_url', '-')))
+
         ent_dict = dict(name=entity.name, type=entity_type.name, salience=float(entity.salience))
         entity_list.append(ent_dict)
         if cnt > 10:
@@ -66,7 +66,8 @@ def entities_text(text): # 항목 분석
 
 if __name__=='__main__':
     # The text to analyze
-    text = u'''탐색할 문자열'''
+
+    text = u'''2019년 4월 17일 오전 4시 25분경 피의자 안인득(42세)은 자신의 집에서 휘발유를 뿌리자마자 방화를 저지른 후, 2층 계단으로 내려가 주민들이 대피하기만을 기다렸다. 화재가 일어나자마자 아파트 주민들이 내려가 대피하려던 순간, 흉기를 마구 휘둘렀다. 이 과정에서 5명이 숨졌고, 6명은 중·경상을 입었다.[2] 9명은 화재 연기를 마셔 병원 치료를 받았다.'''
     score, magnitude = sentiment_text(text)
     print("score : {},  magnitude : {}".format(score, magnitude))
     entities = entities_text(text)

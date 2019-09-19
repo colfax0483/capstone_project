@@ -21,14 +21,6 @@ class Note:
 
         return self.nonote
 
-
-
-
-
-
-
-
-
 def main():
 
     aaa=Note()

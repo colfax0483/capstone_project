@@ -41,10 +41,22 @@ class Iehistory:
                     self.Output[self.OutputRecord]["ResponseHeaders"] = WebHistoryRecord.get_value_data(21)[58:]                          # 0번째 기준 58번째값부터 저장
                     buffer = int.from_bytes((self.Output[self.OutputRecord]["ResponseHeaders"][0:1]), 'big',signed=False) * 2             # buffer(문자열 크기지정)=58,59번째 한 바이트를 정수로 바꾼후에 곱하기 2
                     length = ((self.Output[self.OutputRecord]["ResponseHeaders"][4:buffer + 4]))                                          # length(문자열)=61번째 값부터 buffer(문자열크기)+4까지 제목 문자열임
-                    if length != b'':
-                        # print((self.convert_timestamp(self.Output[self.OutputRecord]["AccessedTime"])),(length.decode('utf-16').encode('utf-8').decode('utf-8')))  # UTF16으로 디코딩 문자열 출력
-                        self.result[(self.convert_timestamp(self.Output[self.OutputRecord]["AccessedTime"]))] = length.decode('utf-16').encode('utf-8').decode('utf-8')[:-1]
-                    self.OutputRecord += 1
+
+                    # print((self.convert_timestamp(self.Output[self.OutputRecord]["AccessedTime"])),(length.decode('utf-16').encode('utf-8').decode('utf-8')))  # UTF16으로 디코딩 문자열 출력
+                    title = length.decode('utf-16').encode('utf-8').decode('utf-8')[:-1]
+                    sitelist = ['YouTube', 'NAVER', 'Google', 'Daum']
+                    title = title.replace(" : 네이버 통합검색", "")
+                    title = title.replace("- Google 검색", "")
+
+                    title = title.rsplit('-', 1)[0]
+                    title = title.rsplit(':', 1)[0]
+                    title = title.strip()
+                    for i in sitelist:
+                        if i in title:
+                            title = title.replace(i, "")
+                    if title != '':
+                        self.result[(self.convert_timestamp(self.Output[self.OutputRecord]["AccessedTime"]))] = title
+                self.OutputRecord += 1
         return self.result
 
 def main():

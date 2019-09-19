@@ -1,4 +1,5 @@
 import sqlite3
+import re
 
 class Note:
 
@@ -12,9 +13,9 @@ class Note:
         self.sql1 = "SELECT Text From Note;"
 
         for row in self.cur.execute(self.sql1):
-            self.nonote.append(row[0][41:])
+            q = re.sub('\\n(?:\\\\[^:\\s?*"<>|]+)+', '', row[0][41:])
+            self.nonote.append(q)
         return self.nonote
-
 
 def main():
 

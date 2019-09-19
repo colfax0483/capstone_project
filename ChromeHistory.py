@@ -138,7 +138,7 @@ def main():
 
     startTime = time.time()
     chrome = Chrome('D:\\GitProject\\capstone_private\\History')
-    foxpath = Firefox('C:\\Users\\Jang\\Desktop\\places.sqlite') #클래스 호출
+    # foxpath = Firefox('C:\\Users\\Jang\\Desktop\\places.sqlite') #클래스 호출
 
     if (select == 0):
         history = chrome.visiturl()
@@ -170,7 +170,6 @@ def main():
         downloadfile = path.sqlselecter(2)
     else:
         print('Error')
-
 '''
 
 if __name__ == '__main__':

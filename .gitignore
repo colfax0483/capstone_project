@@ -3,6 +3,8 @@
 unziptest/
 __pycache__/
 .idea/workspace.xml
+.idea/*.iml
+.idea/*.xml
 *.xml
 *.json
 *.exe
