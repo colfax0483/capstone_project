@@ -151,7 +151,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
 
         column_headers2 = ['Word', 'Count'] # 헤더명 재설정
         self.tableWidget_2.setHorizontalHeaderLabels(column_headers2)
-
+        self.tableWidget_2.sortItems(1, QtCore.Qt.DescendingOrder)
 
     def closeEvent(self, event): # 가비지 콜렉션 정리 후 프로세스 종료하도록 (정상종료를 위해)
         self.deleteLater()
