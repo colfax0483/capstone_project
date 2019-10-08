@@ -82,6 +82,7 @@ class MyWindow(MainGUI, QMainWindow, form_class):
 
     @pyqtSlot()
     def analyze(self):
+        self.artilist = []
         print("Analyze Btn Clicked")
         self.tableWidget.clear()  # QListWidget Clear
         self.tableWidget.setRowCount(0)
@@ -137,17 +138,21 @@ class MyWindow(MainGUI, QMainWindow, form_class):
 
     @pyqtSlot()
     def wordlist(self):
+        self.wordlist = {}
+        self.tableWidget_2.clear()  # QListWidget Clear
+        self.tableWidget_2.setRowCount(0)
+        self.currentRowCount2 = self.tableWidget_2.rowCount()
+        count = 0
+        print(self.currentRowCount2)
         # 아티팩트에서 명사 추출해서 나온 횟수 출력
-        self.words = Morpheme(self.artilist)
-        self.wordlist = self.words.parser()
+        self.wordlist = Morpheme(self.artilist).parser()
 
-        for val, key in enumerate(self.wordlist): # val = 0,1,2,3 ... key=history딕셔너리의 키값(아티팩트)
+        for key, val in self.wordlist.items(): # key=단어, val=횟수
             self.tableWidget_2.insertRow(self.currentRowCount2) # 새로운 행을(row) 현재행(self.currentRowCount) 다음에 추가
-            word = QTableWidgetItem(str(self.wordlist[key])) # 단어
-            count = QTableWidgetItem(key) # 횟수
-            self.tableWidget_2.setItem(self.currentRowCount2, 0, count) # (행, 열, 횟수)
-            self.tableWidget_2.setItem(self.currentRowCount2, 1, word) # (행, 열, 단어)
-
+            word = QTableWidgetItem(str(key)) # 단어
+            count = QTableWidgetItem(str(val)) # 횟수
+            self.tableWidget_2.setItem(self.currentRowCount2, 1, count) # (행, 열, 횟수)
+            self.tableWidget_2.setItem(self.currentRowCount2, 0, word) # (행, 열, 단어)
 
         column_headers2 = ['Word', 'Count'] # 헤더명 재설정
         self.tableWidget_2.setHorizontalHeaderLabels(column_headers2)

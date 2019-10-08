@@ -15,15 +15,17 @@ class Morpheme():
         self.result = {}
 
     def parser(self):
+        self.result = {}
         for line in self.artilist:
             noun_list = self.nlp.nouns(line)
 
             # 단어 검색 및 추가
             for noun in noun_list:
-                # 처음 찾아진 단어일 경우
-                if self.result.get(noun) == None:
+                if str(noun).isnumeric(): # 숫자만 있으면
+                    continue
+                elif self.result.get(noun) == None: # 처음 찾아진 단어일 경우
                     self.result[noun] = 1
-                # 이미 있는 단어일 경우
+                # 이미 있는 단어일 경우 --> 카운트 증가
                 else:
                     self.result[noun] += 1
         # result = sorted(result.items(), key=lambda x:x[1], reverse=True)
@@ -33,7 +35,7 @@ class Morpheme():
         for noun in self.result:
 
             ah = round(self.result[noun] / sum1 * 100, 2)
-            # print(noun + " : " + str(self.result[noun]) + "회(" + str(ah) + "%)")
+            print(noun + " : " + str(self.result[noun]) + "회(" + str(ah) + "%)")
 
         return self.result
 
@@ -43,7 +45,8 @@ def main():
     chrome = ChromeHistory.Chrome('C:\\History01')
     history = chrome.visiturl()
     #wordlist = list(history.values())
-    wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]
+    # wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]
+    wordlist = ["설상가상으로 영국에서 아랍의 폭탄테러로 점보 항공기가 폭발하는 사고도 발생했다."]
     # noun_list = nlp.nouns("공연음란죄는 범죄이다.")
     test = Morpheme(wordlist)
 
