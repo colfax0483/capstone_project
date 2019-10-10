@@ -9,7 +9,8 @@
 import sys
 import os
 from PyQt5.QtWidgets import *
-from PyQt5 import QtGui
+# from PyQt5.QtGui import *
+from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject, QEventLoop, Qt, QDate, QTime, QTimer, QThread
 from PyQt5 import uic
@@ -19,6 +20,7 @@ from Registry import Registry
 from Sticky import Note
 from unzip import *
 from Morpheme import Morpheme
+from Visual import Visualization
 
 form_class = uic.loadUiType("MainWindow.ui")[0]
 timer = QtCore.QTimer()
@@ -150,7 +152,6 @@ class MyWindow(MainGUI, QMainWindow, form_class):
             self.tableWidget_2.setItem(self.currentRowCount2, 0, word) # (행, 열, 단어)
             self.tableWidget_2.setItem(self.currentRowCount2, 1, count) # (행, 열, 횟수)
 
-
         column_headers2 = ['Word', 'Count'] # 헤더명 재설정
         self.tableWidget_2.setHorizontalHeaderLabels(column_headers2)
         self.tableWidget_2.sortItems(1, QtCore.Qt.DescendingOrder)
@@ -164,6 +165,19 @@ class MyWindow(MainGUI, QMainWindow, form_class):
             #self.wordic[text] = count
 
         #return self.wordic
+
+        self.loadImageFromFile()
+
+    def loadImageFromFile(self):
+        if Visualization(self.wordlist, "wordcloud.png").wordCloud() is True:
+            # Qpixmap 객체 생성 후 이미지 파일을 이용하여 QPixmap에 사진 데이터 load, 화면에 표시
+            self.qPixmapFileVar = QPixmap()
+            self.qPixmapFileVar.load("wordcloud.png")
+            self.qPixmapFileVar = self.qPixmapFileVar.scaledToWidth(471)
+            self.lbl_wordcloud.setPixmap(self.qPixmapFileVar)
+            self.show()
+        else:
+            print("Can't load picture")
 
     def closeEvent(self, event): # 가비지 콜렉션 정리 후 프로세스 종료하도록 (정상종료를 위해)
         self.deleteLater()
