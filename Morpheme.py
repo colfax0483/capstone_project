@@ -1,6 +1,6 @@
 import warnings
 warnings.simplefilter("ignore", UserWarning)
-from konlpy.tag import Kkma
+from konlpy.tag import Okt
 import ChromeHistory
 
 class Morpheme():
@@ -11,7 +11,7 @@ class Morpheme():
             # raise UnknownTypeException()
             print("Not List")
 
-        self.nlp = Kkma()
+        self.nlp = Okt()
         self.result = {}
 
     def parser(self):
@@ -40,7 +40,7 @@ class Morpheme():
 
 
 def main():
-    chrome = ChromeHistory.Chrome('C:\\History01')
+    chrome = ChromeHistory.Chrome('C:\\History')
     history = chrome.visiturl()
     #wordlist = list(history.values())
     wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]

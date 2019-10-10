@@ -140,18 +140,30 @@ class MyWindow(MainGUI, QMainWindow, form_class):
         # 아티팩트에서 명사 추출해서 나온 횟수 출력
         self.words = Morpheme(self.artilist)
         self.wordlist = self.words.parser()
+        self.tableWidget_2.clear()  # QListWidget Clear
+        self.tableWidget_2.setRowCount(0)
 
-        for val, key in enumerate(self.wordlist): # val = 0,1,2,3 ... key=history딕셔너리의 키값(아티팩트)
+        for key, val in enumerate(self.wordlist): # val = 0,1,2,3 ... key=history딕셔너리의 키값(아티팩트)
             self.tableWidget_2.insertRow(self.currentRowCount2) # 새로운 행을(row) 현재행(self.currentRowCount) 다음에 추가
-            word = QTableWidgetItem(str(self.wordlist[key])) # 단어
-            count = QTableWidgetItem(key) # 횟수
-            self.tableWidget_2.setItem(self.currentRowCount2, 0, count) # (행, 열, 횟수)
-            self.tableWidget_2.setItem(self.currentRowCount2, 1, word) # (행, 열, 단어)
+            word = QTableWidgetItem(val) # 단어
+            count = QTableWidgetItem(str(self.wordlist[val])) # 횟수
+            self.tableWidget_2.setItem(self.currentRowCount2, 0, word) # (행, 열, 단어)
+            self.tableWidget_2.setItem(self.currentRowCount2, 1, count) # (행, 열, 횟수)
 
 
         column_headers2 = ['Word', 'Count'] # 헤더명 재설정
         self.tableWidget_2.setHorizontalHeaderLabels(column_headers2)
         self.tableWidget_2.sortItems(1, QtCore.Qt.DescendingOrder)
+
+        row_count2 = self.tableWidget_2.rowCount()
+
+        #for idx in range(row_count2): 딕션은 이렇게 사용을 할 수도 있다. feat.박도현
+            #text = self.tableWidget_2.item(idx, 0)
+            #count = self.tableWidget_2.item(idx, 1)
+
+            #self.wordic[text] = count
+
+        #return self.wordic
 
     def closeEvent(self, event): # 가비지 콜렉션 정리 후 프로세스 종료하도록 (정상종료를 위해)
         self.deleteLater()
