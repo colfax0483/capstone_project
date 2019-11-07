@@ -1,4 +1,5 @@
 from Morpheme import *
+import operator
 import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc  #한글폰트를 지원받기 위해 사용
 import pytagcloud #C:\Users\LOGOS-J\AppData\Local\Programs\Python\Python36\Lib\site-packages\pytagcloud\fonts
@@ -29,15 +30,18 @@ class Visualization():
 
     def wordCloud(self):
         try:
-            taglist = pytagcloud.make_tags(self.wordinfo.items(), maxsize=80)
-            pytagcloud.create_tag_image(taglist, self.filename, size=(640, 480), fontname='Nanum Gothic Coding', rectangular=False)
+            taglist = pytagcloud.make_tags(self.wordinfo.items(), maxsize=100)
+            pytagcloud.create_tag_image(taglist, self.filename, size=(640, 480), fontname='Nanum Gothic Coding', rectangular=False, layout = pytagcloud.LAYOUT_MOST_HORIZONTAL)
             # webbrowser.open(self.filename)
         except:
             raise FileExistsError
         return True
 
 def main():
-    wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]
+    # wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]
+    wordlist = ["살해", "살해", "살해", "살해", "살해", "살해", "살해", "살해", "방화", "방화", "방화", "방화", "방화", "방화", "방화", "방화", "방화", "사건", "사건", "사건", "사건", "사건", "사건", "사건", "범죄", "범죄", "범죄", "범죄", "범죄",
+     "범죄", "범죄", "사회", "사회", "사회", "사회", "사회", "사회", "사회", "밀실살인", "밀실살인", "밀실살인", "밀실살인", "밀실살인", "농약", "농약", "농약", "농약", "몰래카메라", "뉴스",
+     "뉴스", "뉴스", "뉴스", "스토커", "스토커", "스토커", "스토커", "의사", "의사", "의사", "아내", "아내", "아내", "아내", "방법", "방법", "방법", "아파트", "아파트", "연탄"]
 
     test = Morpheme(wordlist)
     wordInfo = test.parser()
