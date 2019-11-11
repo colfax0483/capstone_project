@@ -66,7 +66,7 @@ class Chrome(Mysql):
 
         for row in c.execute(self.selectStatement2):  # 방문한 사이트 타이틀
             # print(str(fixDate(row[0])),"\n\tURL: ", str(row[1]), "\n\tTITLE: ", row[2])
-            sitelist = ['YouTube', 'NAVER', 'Google', 'Daum']
+            sitelist = ['YouTube', 'NAVER', 'Google', 'Daum', '검색']
             title = row[2].replace(" : 네이버 통합검색", "")
             title = row[2].replace("- Google 검색","")
 

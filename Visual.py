@@ -37,7 +37,7 @@ class Visualization():
         self.newdict2 = dict(itertools.islice(self.newdict.items(), 20))
         # print(self.newdict)
         taglist = pytagcloud.make_tags(self.newdict2.items(), maxsize=100)
-        pytagcloud.create_tag_image(taglist, self.filename, size=(600, 480), fontname='Korean', rectangular=False, layout = pytagcloud.LAYOUT_MOST_HORIZONTAL)
+        pytagcloud.create_tag_image(taglist, self.filename, size=(360, 280), fontname='Korean', rectangular=False, layout = pytagcloud.LAYOUT_MOST_HORIZONTAL)
 
         # webbrowser.open(self.filename)
 
