@@ -4,12 +4,15 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc  #한글폰트를 지원받기 위해 사용
 import pytagcloud #C:\Users\LOGOS-J\AppData\Local\Programs\Python\Python36\Lib\site-packages\pytagcloud\fonts
 import webbrowser
+import itertools
 
 class Visualization():
     def __init__(self, wordInfo, filename = None):
 
         self.wordinfo = wordInfo
         self.filename = filename or "wordcloud.png"
+        self.newdict = {}
+        self.newdict2 = {}
 
     def showGraph(self): #wordlist 딕셔너리 형식의 데이터를 받아 막대 그래프를 그리는 함수
         font_fname = 'C:\\Windows\\Fonts\\gulim.ttc'
@@ -29,13 +32,18 @@ class Visualization():
         plt.show()
 
     def wordCloud(self):
-        try:
-            taglist = pytagcloud.make_tags(self.wordinfo.items(), maxsize=100)
-            pytagcloud.create_tag_image(taglist, self.filename, size=(640, 480), fontname='Nanum Gothic Coding', rectangular=False, layout = pytagcloud.LAYOUT_MOST_HORIZONTAL)
-            # webbrowser.open(self.filename)
-        except:
-            raise FileExistsError
+
+        self.newdict = dict(sorted(self.wordinfo.items(), key=operator.itemgetter(1), reverse=True))
+        self.newdict2 = dict(itertools.islice(self.newdict.items(), 20))
+        # print(self.newdict)
+        taglist = pytagcloud.make_tags(self.newdict2.items(), maxsize=100)
+        pytagcloud.create_tag_image(taglist, self.filename, size=(600, 480), fontname='Korean', rectangular=False, layout = pytagcloud.LAYOUT_MOST_HORIZONTAL)
+
+        # webbrowser.open(self.filename)
+
         return True
+
+
 
 def main():
     # wordlist = ["공연음란죄는 범죄이다.", "고슴도치는 귀엽다.", "보이스피싱은 범죄이다.", "범죄자는 위험하다.", "보이스피싱의 범죄자는 연변사람이다.", "보이스피싱은 최근 급증하고 있다."]
