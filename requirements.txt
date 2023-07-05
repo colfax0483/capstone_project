@@ -13,7 +13,7 @@ google-auth==1.6.3
 google-cloud-language==1.2.0
 googleapis-common-protos==1.6.0
 googletrans==2.4.0
-grpcio==1.22.0
+grpcio==1.53.0
 idna==2.8
 importlib-metadata==0.19
 JPype1==0.7.0
